@@ -37,5 +37,5 @@ En esta sección se mostrará el paso a paso 👣 para instalar las herramientas
 2. Instalación de Angular CLI
     - Abrir una nueva terminal
     - Ejecutar en la terminal el comando `npm install -g @angular/cli`
-    - Ejecutar en la terminal el comando ` ng --version`
+    - Ejecutar en la terminal el comando `ng --version`
     - Si NodeJS fue instalado correctamente, deberíamos ver un mensaje parecido a este: `18.0.3`

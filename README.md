@@ -3,21 +3,20 @@ El objetivo principal de esta guía es preparar a nuevos programadores para que 
 Los conceptos tratados en esta guía son los considerados fundamentales para construir proyectos reales, así que se obviarán algunos conceptos más específicos.
 A continuación se muestra el contenido del curso, desde la instalación de herramientas necesarias para continuar el curso, hasta conceptos más avanzados que irán agregándose progresivamente:
 
-## [Instalación de herramientas 🛠️](./Modules/ToolsInstallation.md)
-1. [Instalación de GIT](./Modules/ToolsInstallation.md#1-instalación-de-git)
-2. [Backend](./Modules/ToolsInstallation.md#2-backend)
+## [Instalación de herramientas 🛠️](./docs/ToolsInstallation.md)
+1. [Instalación de GIT](./docs/ToolsInstallation.md#1-instalación-de-git)
+2. [Backend](./docs/ToolsInstallation.md#2-backend)
     - Instalación de .NET SDK
     - Instalación de Visual Studio/Jetbrains Rider
-3. [Base de Datos](./Modules/ToolsInstallation.md#3-base-de-datos)
+3. [Base de Datos](./docs/ToolsInstallation.md#3-base-de-datos)
     - Instalación de PostgreSQL
     - Instalación de Jetbrains DataGrip
-4. [Frontend](./Modules/ToolsInstallation.md#4-frontend)
+4. [Frontend](./docs/ToolsInstallation.md#4-frontend)
     - Instalación de NodeJS
     - Instalación de Angular CLI 
 
-## Módulo 1: Fundamentos de Programación
+## [Módulo 1: Fundamentos de Programación](./docs/ProgrammingFundamentals.md)
 ### 1.1 Introducción a la Programación
-- ¿Qué es la programación?
 - Variables, tipos de datos y operadores
 - Estructuras de control (if, switch, bucles)
 - Funciones y procedimientos
