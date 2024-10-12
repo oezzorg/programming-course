@@ -207,10 +207,147 @@ switch (dia)
 }
 ```
 
-### Funciones y procedimientos
+#### Bucles
+Permiten ejecutar un bloque de código `x` cantidad de veces, esto nos ayuda cuando requerimos repetir un proceso varias veces.
+Algunos casos donde podemos usarlo es cuando queremos registrar múltiples datos queremos reintentar un proceso.
+En los lenguajes de programación tenemos normalmente 4 estructuras conocidas que son:
+
+##### For
+Este bucle normalmente lo usamos cuando conocemos de antemano cuántas veces queremos ejecutar un bloque de código.
+```csharp
+for (int i = 0; i < 3; i++)
+{
+    Console.WriteLine(i);
+}
+// Resultado:
+// 0
+// 1
+// 2
+```
+
+##### Foreach
+Este bucle normalmente lo usamos cuando queremos recorrer una lista de objetos y ejecutar una porción de código por cada elemento de la lista.
+```csharp
+List<int> numeros = [ 0, 1, 1, 2, 3, 5, 8, 13 ];
+foreach (int elemento in numeros)
+{
+    Console.WriteLine($"Elemento: {elemento} ");
+}
+// Resultado:
+// Elemento: 0
+// Elemento: 1
+// Elemento: 1
+// Elemento: 2
+// Elemento: 3
+// Elemento: 5
+// Elemento: 8
+// Elemento: 13
+```
+##### While
+Este bucle normalmente lo usamos cuando conocemos queremos ejecutar una porción de código hasta que se cumpla una condición y no conocemos de antemano cuántas veces camos a ejecutarlo.
+```csharp
+int numero = 0;
+while (numero < 5)
+{
+    Console.Write(numero);
+    numero++;
+}
+// Resultado:
+// 0
+// 1
+// 2
+// 3
+// 4
+```
+
+##### Do
+Este bucle es similar con el bucle `while`, la única diferencia es que primero ejecutamos el bloque de código y luego evaluamos la condición, lo que resulta en que mientras el `while` podría no ejecutarse una sola vez, el `do` siempre se ejecutará mínimo una vez.
+```csharp
+int numero = 0;
+do
+{
+    Console.WriteLine(numero);
+    numero++;
+} while (numero < 5);
+// Resultado:
+// 0
+// 1
+// 2
+// 3
+// 4
+```
+
+### Funciones/métodos
+Las funciones/métodos son formas de encapsular o aislar un bloque de código, normalmente lo usamos cuando queremos usar la misma porción de código en dos lugares distintos. Este concepto de funciones o métodos, nos permiten a no escribir el mismo código múltiples veces, sino poder utilizarlo donde lo necesitemos.
+
+Nota: Otro uso que tienen las funciones o métodos, es hacer que nuestro código sea más fácil de leer y de darle mantenimiento.
+
+Dentro de las funciones y métodos tenemos dos tipos que son, las funciones que no retornan ningún valor, y las funciones que sí retornan un valor:
+
+```csharp
+// Esta es una función sencilla que nos permite sumar dos números enteros
+public int Sumar(int a, int b)
+{
+    return a + b;
+}
+
+// Para hacer uso de esta función debemos "llamarla" y asignamos su valor a una variable
+int resultado = Sumar(1, 2);
+
+Console.WriteLine(resultado);
+// Resultado:
+// 3
+
+```
+
+```csharp
+// Esta es una función sencilla que nos permite mostrar por pantalla un mensaje
+public void MostrarMensaje()
+{
+    Console.WriteLine("Este es un mensaje.");
+}
+
+// Como la función no retorna ningún valor, debemos llamarla sin asignarlo a ninguna variable
+MostrarMensaje();
+
+// Resultado
+// Este es un mensaje.
+```
 
 ## 1.2 Programación Orientada a Objetos (POO)
+La programación orientada a objetos es una forma de escribir código, a esto se le conoce como **paradigma** de programación. Los dos paradigmas más utilizados son **Programación Orientada a Objetos** y **Programación Estructurada**, la diferencia radica en que mientras que la **Programación Estructurada** se centra en resolver los problemas usando únicamente *funciones o procedimientos*, la **Programación Orientada a Objetos** hace uso de otros conceptos que veremos a continuación.
+
+Nota: En este curso nos enfocaremos principalmente en esta última.
+
+La **Programación Orientada a Objetos** se basa en un concepto de **objetos**, y con esto busca que creemos nuestro código como si interactuáramos con objetos del mundo real, es decir, estos "objetos" pueden interactuar, tiene sus propiedades, ejecutan acciones, tienen ciertas capacidades, toman decisiones, etc.
+
+```csharp
+// Diferencia entre programación estructural y programación orientada a objetos
+
+// Programación estructural:
+public string Saludar(string nombre)
+{
+    return "Hola, " + nombre;
+}
+
+// Programación orientada a objetos:
+public class Persona
+{
+    public string Nombre { get; set; }
+
+    public void Saludar()
+    {
+        Console.WriteLine("Hola, mi nombre es " + Nombre);
+    }
+}
+```
+En el anterior ejemplo podemos ver que la diferencia principal radica en que mientras que en la programación estructurada tenemos una función que "Saluda", en la programación orientada a objetos, tenemos a una "Persona" que saluda.
+
 ### Clases y objetos
+El primer concepto o el concepto central de la *POO* son los *objetos*, intimamente relacionado a este concepto, está el concepto de *clases*.
+
+¿Qué son las clases? Las clases son "plantillas" o "planos" para crear un objeto  
+
 ### Encapsulamiento, herencia y polimorfismo
 ### Interfaces y clases abstractas
 ### Uso de patrones de diseño básicos
