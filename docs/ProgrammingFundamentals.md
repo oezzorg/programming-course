@@ -315,7 +315,7 @@ MostrarMensaje();
 ```
 
 ## 1.2 Programación Orientada a Objetos (POO)
-La programación orientada a objetos es una forma de escribir código, a esto se le conoce como **paradigma** de programación. Los dos paradigmas más utilizados son **Programación Orientada a Objetos** y **Programación Estructurada**, la diferencia radica en que mientras que la **Programación Estructurada** se centra en resolver los problemas usando únicamente *funciones o procedimientos*, la **Programación Orientada a Objetos** hace uso de otros conceptos que veremos a continuación.
+La programación orientada a objetos es una forma de escribir código, a esto se le conoce como *paradigma* de programación. Los dos *paradigmas* más utilizados son **Programación Orientada a Objetos** y **Programación Estructurada**, la diferencia radica en que mientras que la **Programación Estructurada** se centra en resolver los problemas usando únicamente *funciones o procedimientos*, la **Programación Orientada a Objetos** hace uso de otros conceptos que veremos a continuación.
 
 Nota: En este curso nos enfocaremos principalmente en esta última.
 
@@ -345,8 +345,28 @@ En el anterior ejemplo podemos ver que la diferencia principal radica en que mie
 
 ### Clases y objetos
 El primer concepto o el concepto central de la *POO* son los *objetos*, intimamente relacionado a este concepto, está el concepto de *clases*.
+Las clases son "plantillas" o "planos" para crear un objeto, mientras que los objetos son "instancias" de las clases, es decir, entidades concretas.
 
-¿Qué son las clases? Las clases son "plantillas" o "planos" para crear un objeto  
+En la siguiente imagen podemos ver una *clase* **Persona** con cuatro *objetos* (instancias) diferentes:
+![Clase Persona con múltiples instancias](../img/class.png)
+
+En C# una clase se define usando un nombre, esta clase puede contener una o más propiedades:
+```csharp
+// Definición de la clase
+public class Persona
+{
+    // Propiedad
+    public string Nombre { get; set; }
+}
+```
+
+Un *objeto* se crea instanciando la clase, al momento de crear un *objeto* se usa la palabra clase **new**:
+```csharp
+Persona pedro = new Persona();
+
+// Uso de las propiedades
+Console.WriteLine(pedro.Nombre);
+```
 
 ### Encapsulamiento, herencia y polimorfismo
 ### Interfaces y clases abstractas
