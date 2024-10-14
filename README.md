@@ -16,12 +16,12 @@ A continuación se muestra el contenido del curso, desde la instalación de herr
     - Instalación de Angular CLI 
 
 ## [Módulo 1: Fundamentos de Programación](./docs/ProgrammingFundamentals.md)
-### 1.1 Introducción a la Programación
+### [1.1 Introducción a la Programación](./docs/ProgrammingFundamentals.md#11-introducción-a-la-programación)
 - Variables, tipos de datos y operadores
 - Estructuras de control (if, switch, bucles)
 - Funciones y procedimientos
 
-### 1.2 Programación Orientada a Objetos (POO)
+### [1.2 Programación Orientada a Objetos (POO)](./docs/ProgrammingFundamentals.md#12-programación-orientada-a-objetos-poo)
 - Clases y objetos
 - Encapsulamiento, herencia y polimorfismo
 - Interfaces y clases abstractas
