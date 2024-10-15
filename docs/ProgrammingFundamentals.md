@@ -1,4 +1,5 @@
 # Módulo 1: Fundamentos de Programación
+
 ## 1.1 Introducción a la Programación
 
 ### Variables, tipos de datos y operadores
@@ -231,18 +232,11 @@ Este bucle normalmente lo usamos cuando queremos recorrer una lista de objetos y
 List<int> numeros = [ 0, 1, 1, 2, 3, 5, 8, 13 ];
 foreach (int elemento in numeros)
 {
-    Console.WriteLine($"Elemento: {elemento} ");
+    Console.Write($"{elemento} ");
 }
-// Resultado:
-// Elemento: 0
-// Elemento: 1
-// Elemento: 1
-// Elemento: 2
-// Elemento: 3
-// Elemento: 5
-// Elemento: 8
-// Elemento: 13
+// Resultado: 0 1 1 2 3 5 8 13
 ```
+
 ##### While
 Este bucle normalmente lo usamos cuando conocemos queremos ejecutar una porción de código hasta que se cumpla una condición y no conocemos de antemano cuántas veces camos a ejecutarlo.
 ```csharp
@@ -252,12 +246,7 @@ while (numero < 5)
     Console.Write(numero);
     numero++;
 }
-// Resultado:
-// 0
-// 1
-// 2
-// 3
-// 4
+// Resultado: 01234
 ```
 
 ##### Do
@@ -266,15 +255,10 @@ Este bucle es similar con el bucle `while`, la única diferencia es que primero 
 int numero = 0;
 do
 {
-    Console.WriteLine(numero);
+    Console.Write(numero);
     numero++;
 } while (numero < 5);
-// Resultado:
-// 0
-// 1
-// 2
-// 3
-// 4
+// Resultado: 01234
 ```
 
 ### Funciones/métodos
@@ -295,9 +279,7 @@ public int Sumar(int a, int b)
 int resultado = Sumar(1, 2);
 
 Console.WriteLine(resultado);
-// Resultado:
-// 3
-
+// Resultado: 3
 ```
 
 ```csharp
@@ -307,19 +289,20 @@ public void MostrarMensaje()
     Console.WriteLine("Este es un mensaje.");
 }
 
-// Como la función no retorna ningún valor, debemos llamarla sin asignarlo a ninguna variable
+// Como la función no retorna ningún valor, no podemos asignarla a ninguna variable
 MostrarMensaje();
 
-// Resultado
-// Este es un mensaje.
+// Resultado: Este es un mensaje.
 ```
 
 ## 1.2 Programación Orientada a Objetos (POO)
 La programación orientada a objetos es una forma de escribir código, a esto se le conoce como *paradigma* de programación. Los dos *paradigmas* más utilizados son **Programación Orientada a Objetos** y **Programación Estructurada**, la diferencia radica en que mientras que la **Programación Estructurada** se centra en resolver los problemas usando únicamente *funciones o procedimientos*, la **Programación Orientada a Objetos** hace uso de otros conceptos que veremos a continuación.
 
-Nota: En este curso nos enfocaremos principalmente en esta última.
+> Nota: En este curso nos enfocaremos principalmente en este último paradigma.
 
 La **Programación Orientada a Objetos** se basa en un concepto de **objetos**, y con esto busca que creemos nuestro código como si interactuáramos con objetos del mundo real, es decir, estos "objetos" pueden interactuar, tiene sus propiedades, ejecutan acciones, tienen ciertas capacidades, toman decisiones, etc.
+
+> Nota: La programación orientada a objetos tiene 4 pilares: encapsulamiento, herencia, polimorfismo y abstracción.
 
 ```csharp
 // Diferencia entre programación estructural y programación orientada a objetos
@@ -366,8 +349,154 @@ Persona pedro = new Persona();
 
 // Uso de las propiedades
 Console.WriteLine(pedro.Nombre);
+
+/* Los objetos también pueden inicializarse de las siguientes formas: */
+
+// Usando la palabra reservada 'var' para ocultar el tipo de objeto, esto es posible si el tipo de datos puede inferirse en la misma línea
+var cristina = new Persona();
+
+// Al usar el tipo de objeto, si escribimos la palabra reservada 'new', el compilador infiere qué clase queremos instanciar
+Persona manuel = new();
+
+// Al crear un objeto, podemos también inicializar un objeto, los '()' no son necesarios
+var maria = new Persona
+{
+    Nombre = "María"
+};
+```
+
+### Modificadores o niveles de acceso
+Los modificadores de acceso nos indican si podemos acceder a una propiedad, método o clase específica desde otra parte del programa.
+
+#### Public
+Es el nivel de acceso más permisisvo, nos permite acceder desde cualquier parte del programa
+
+```csharp
+public class Persona
+{
+    public string Nombre { get; set; }
+
+    // Constructor: Método que se ejecutará cuando usemos la palabra new
+    public Persona()
+    {
+        Nombre = "Ramiro";
+    }
+
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {Nombre}");        
+    }
+}
+
+// Podemos acceder tanto a la clase
+var persona = new Persona();
+
+// Como a sus propiedades
+Console.WriteLine(persona.Nombre);
+// Resultado: Ramiro
+
+// Como a sus métodos
+persona.Saludar();
+// Resultado: Hola, mi nombre es Ramiro
+```
+
+#### Internal
+Se comporta similar al modificador `public`, la diferencia radica en que el modificador `internal` solo permite acceso a los elementos desde la misma 'librería'. Este nivel de acceso no lo usaremos mucho en esta guía.
+
+
+```csharp
+/* Código de una librería externa */
+
+namespace libreria;
+
+internal class Persona
+{
+}
+
+.
+.
+.
+
+/* Mi código */
+
+// Importamos la librería
+using libreria;
+
+namespace mi.codigo;
+
+// Esto lanzará un error indicándonos que no se puede usar esta clase
+var persona = new Persona();
+```
+
+> Nota: Este modificador de acceso normalmente se usa cuando queremos publicar nuestras propias librerías para que las consuman otros proyectos.
+
+#### Private
+Este modificador se acceso se usa para limitar el acceso únicamente desde dentro de la misma clase
+
+```csharp
+public class Persona
+{
+    private string Nombre { get; set; }
+
+    public Persona()
+    {
+        Nombre = "Ramiro";
+    }
+
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {Nombre}");        
+    }
+}
+
+var persona = new Persona();
+
+persona.Saludar();
+// Resultado: Hola, mi nombre es Ramiro
+
+// Esto lanzará un error indicándonos que no se puede usar esta propiedad
+Console.WriteLine(persona.Nombre);
+```
+
+#### Protected
+Este modificador de acceso es similar al modificador `private` con la diferencia que en este caso podemos acceder también desde clases que 'heredan' o derivan desde donde se define
+
+```csharp
+public class Persona
+{
+    protected string Nombre { get; set; }
+
+    protected Persona()
+    {
+        Nombre = "Ramiro";
+    }
+
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {Nombre}");
+    }
+}
+
+// Clase que hereda o deriva de la clase 'Persona'
+public class Empleado : Persona
+{
+    public Empleado()
+    {
+    }
+}
+
+var empleado = new Empleado();
+
+empleado.Saludar();
+// Resultado: Hola, mi nombre es Ramiro
+
+// Esto lanzará un error indicándonos que no se puede usar esta propiedad
+Console.WriteLine(persona.Nombre);
 ```
 
 ### Encapsulamiento, herencia y polimorfismo
+
+#### Encapsulamiento
+Este concepto hace referencia a la capacidad que tienen los objetos de ocultar/mostrar sus propiedades y métodos.
+
 ### Interfaces y clases abstractas
-### Uso de patrones de diseño básicos

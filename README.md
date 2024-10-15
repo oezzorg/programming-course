@@ -1,5 +1,5 @@
 # Curso de Programación
-El objetivo principal de esta guía es preparar a nuevos programadores para que mejoren su nivel con el fin de prepararse para un ambiente laboral.
+El objetivo principal de esta guía es ayudar a nuevos programadores para que mejoren su nivel con el fin de prepararse para un ambiente laboral.
 Los conceptos tratados en esta guía son los considerados fundamentales para construir proyectos reales, así que se obviarán algunos conceptos más específicos.
 A continuación se muestra el contenido del curso, desde la instalación de herramientas necesarias para continuar el curso, hasta conceptos más avanzados que irán agregándose progresivamente:
 
@@ -25,7 +25,7 @@ A continuación se muestra el contenido del curso, desde la instalación de herr
 - Clases y objetos
 - Encapsulamiento, herencia y polimorfismo
 - Interfaces y clases abstractas
-- Uso de patrones de diseño básicos
+- Niveles de acceso
 
 ## Módulo 2: Introducción a .NET y ASP.NET Core
 ### 2.1 Instalación y Configuración de .NET Core
