@@ -499,4 +499,63 @@ Console.WriteLine(persona.Nombre);
 #### Encapsulamiento
 Este concepto hace referencia a la capacidad que tienen los objetos de ocultar/mostrar sus propiedades y métodos.
 
+```csharp
+public class Persona
+{
+    // Propiedad privada, nadie más puede verla
+    private string _nombre;
+
+    // Propiedad pública, todos pueden verla
+    public string Nombre { get => _nombre; set => _nombre.Value };
+
+    // Propiedad de solo lectura
+    public int Edad { get; }
+
+    // Propiedad que solo puede modificarse desde la misma clase
+    public int Apellidos { get; private set; }
+
+    public Persona()
+    {
+        Nombre = "Ramiro";
+        Edad = 25;
+        Apellidos = "González";
+    }
+
+    public void ModificarApellidos(string valor)
+    {
+        Apellidos = valor;
+    }
+}
+
+var persona = new Persona();
+
+persona._nombre = "Pablo";
+// Error: No se puede acceder a esta propiedad
+
+Console.WriteLine(persona._nombre);
+// Error: No se puede acceder a esta propiedad
+
+persona.Nombre = "Eduardo";
+// Ok
+
+Console.WriteLine(persona.Nombre);
+// Resultado: Eduardo
+
+persona.Edad = 20;
+// Error: Esta propiedad es de solo lectura
+
+Console.WriteLine(persona.Edad);
+// Resultado: 25
+
+persona.Apellidos = "López";
+// Error: Esta propiedad no puede modificarse
+
+Console.WriteLine(persona.Apellidos);
+// Resultado: González
+
+persona.ModificarApellidos("Arias");
+Console.WriteLine(persona.Apellidos);
+// Resultado: Arias
+```
+
 ### Interfaces y clases abstractas
