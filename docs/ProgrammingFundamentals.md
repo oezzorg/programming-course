@@ -558,4 +558,185 @@ Console.WriteLine(persona.Apellidos);
 // Resultado: Arias
 ```
 
+### Herencia y Polimorfismo
+La herencia en POO es la capacidad de crear una nueva clase (hija) a partir de una clase base (padre). La herencia se usa para compartir propiedades y comportamientos entre clases.
+
+```csharp
+public class Animal
+{
+    public string Especie { get; set; }
+    public void EmitirSonido()
+    {
+        Console.WriteLine($"Emitiendo sonido...");
+    }
+}
+
+// En C# para indicar herencia, usamos los dos puntos (:)
+public class Perro : Animal
+{
+}
+
+var perro = new Perro
+{
+    Especie = "Caninos"    
+};
+
+Console.WriteLine(perro.Especie);
+// Resultado: Caninos
+perro.EmitirSonido();
+// Resultado: Emitiendo sonido...
+```
+
+Como podemos observar en el ejemplo, un `Perro` 'hereda' de `Animal`, es decir, `Perro` es la **clase hija** y `Animal` es la **clase padre**. Podemos decir entonces que `Perro` tiene todas las propiedades y métodos de `Animal`.
+
+El polimorfismo por su parte está relacionado con la herencia, se puede decir que es la capacidad de crear diferentes objetos a partir de una clase base, donde cada objeto tiene una diferente implementación. Esto podemos entenderlo cuando usamos **interfaces y clases abstractas**.
+
 ### Interfaces y clases abstractas
+#### Interfaces:
+Hacen referencia a un contrato que pueden implementar o cumplir ciertas clases, es decir, una interfaz es una forma de "obligar" a una clase que cumpla con cierta estructura y funcionalidad.
+
+Una interfaz se define de la siguiente manera:
+
+```csharp
+public interface IPersona
+{
+    string RazonSocial { get; set; }
+
+    // Se declara el método, pero no se implementa
+    void Saludar();
+}
+```
+
+Una interfaz se implementa de la siguiente manera:
+
+```csharp
+// Una persona natural cumple con el contrato de 'IPersona'
+public class PersonaNatural : IPersona
+{
+    // La clase debe [obligatoriamente] tener esta propiedad
+    public string RazonSocial { get; set; }
+
+    // La clase debe [obligatoriamente] tener este método
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {RazonSocial}");
+    }
+}
+
+// Una persona jurídica también cumple con el contrato de 'IPersona'
+public class PersonaJuridica : IPersona
+{
+    // La clase debe [obligatoriamente] tener esta propiedad
+    public string RazonSocial { get; set; }
+
+    // La clase debe [obligatoriamente] tener este método
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, soy la persona jurídica: {RazonSocial}");
+    }
+}
+```
+
+#### Clases abstractas:
+El uso de las clases abstractas es bastante parecido a las interfaces, incluso, en algunos casos, se puede usar de manera indiferente una interfaz o una clase abstracta.
+
+Es similar a una clase normal, con una diferencia importante: Una clase abstracta no puede ser instanciada, es decir, no puedo crear objetos a partir de ella.
+
+
+```csharp
+public abstract class Persona
+{
+    public string RazonSocial { get; set; }
+
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {RazonSocial}");
+    }
+}
+
+// No es posible hacer esto: var persona = new Persona();
+```
+
+##### ¿Cómo y cuándo usar una clase abstracta?
+Una clase abstracta se usa cuando queremos utilizar lógica compartida entre varias clases, ejemplo:
+
+```csharp
+// Ambas clases comparten la propiedad 'RazonSocial' e implementan de manera idéntica el método 'Saludar'
+
+public class PersonaNatural : Persona
+{
+}
+
+public class PersonaJuridica : Persona
+{
+}
+```
+
+##### Operadores:
+* abstract
+
+```csharp
+// Se usa cuando queremos obligar a que las clases deban crear una implementación obligatoriamente:
+public abstract class Persona
+{
+    public string RazonSocial { get; set; }
+    public abstract void Saludar();
+}
+
+public class PersonaNatural : Persona
+{
+    // Este método debe crearse obligatoriamente
+    public void Saludar()
+    {
+        Console.WriteLine($"Hola, mi nombre es {RazonSocial}");
+    }
+}
+```
+* new
+```csharp
+// Se usa cuando queremos crear nuestra propia implementación y no usar la de la clase abstracta:
+public class PersonaNatural : Persona
+{
+    public new void Saludar()
+    {
+        Console.WriteLine($"Esta es una nueva implementación");
+    }
+}
+
+var personaNatural = new PersonaNatural();
+personaNatural.Saludar();
+// Resultado: Esta es una nueva implementación
+```
+
+* virtual-override
+
+```csharp
+// Se usa cuando queremos dejar una implementación en nuestra clase abstracta para que se pueda sobreescribir más adelante si se quiere:
+public abstract class Persona
+{
+    public virtual void Saludar()
+    {
+        Console.WriteLine($"Esta la implementación original");
+    }
+}
+
+public class PersonaNatural : Persona
+{
+    public override void Saludar()
+    {
+        Console.WriteLine($"Esta es la implementación sobreescrita");
+    }
+}
+
+public class PersonaJuridica : Persona
+{
+}
+
+var personaNatural = new PersonaNatural();
+personaNatural.Saludar();
+// Resultado: Esta es la implementación sobreescrita
+
+var personaJuridica = new PersonaJuridica();
+personaJuridica.Saludar();
+// Resultado: Esta la implementación original
+```
