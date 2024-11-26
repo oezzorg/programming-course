@@ -102,6 +102,11 @@ public class UsersController : ControllerBase
         return userToUpdate;
     }
 
+    /// <summary>
+    /// Eliminar un usuario
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
     [HttpDelete("{username}")]
     public ActionResult<User> DeleteUser(string username)
     {
