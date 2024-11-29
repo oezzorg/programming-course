@@ -1,0 +1,56 @@
+@API_HostAddress = http://localhost:5114
+
+GET {{API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+### https://localhost:5001/api/v1/users
+### https://[domain]/[prefix]/[controller]
+
+### Por lo general tenemos 5 métodos por cada controlador
+
+### 1. [GET] https://[domain]/[controller]
+### - Obtiene todos los recursos del servidor, por lo general, se paginan los resultados
+### - Ejemplo: https://localhost:5001/users?page=1&size=10
+### - Descripción: Obtener 10 usuarios. ('page' = página que quiero consultar, 'size' = número de recursos que quiero por página)
+### - Ejemplo de respuesta
+### [
+###   {
+###     "id": "dfksdlf90",
+###     "username": "user01"
+###   },
+###   {
+###     "id": "dfksdlf90",
+###     "username": "user01"
+###   }    
+### ]
+
+### 2. [POST] https://[domain]/[controller]
+### - Registra un recurso en el servidor
+### - Ejemplo: https://localhost:5001/users -- { "username": "user01" }
+### - Ejemplo de respuesta
+### {
+###   "id": "dfksdlf90",
+###   "username": "user01"
+### }
+
+### 3. [GET] https://[domain]/[controller]/{id}
+### - Consulta UN recurso en el servidor, por lo general se usa la propiedad 'id'
+### - Ejemplo: https://localhost:5001/users/dfksdlf90
+### - Ejemplo de respuesta
+### {
+###   "id": "dfksdlf90",
+###   "username": "user01"
+### }
+
+### 4. [PUT] https://[domain]/[controller]/{id}
+### - Actualiza UN recurso en el servidor, por lo general se usa la propiedad 'id'
+### - Ejemplo: https://localhost:5001/users/dfksdlf90 -- { "username": "user02" }
+### - Ejemplo de respuesta
+### {
+###   "id": "dfksdlf90",
+###   "username": "user02"
+### }
+
+### 5. [DELETE] https://[domain]/[controller]/{id}
+### - Eliminar UN recurso en el servidor, por lo general se usa la propiedad 'id'
+### - Ejemplo: https://localhost:5001/users/dfksdlf90
