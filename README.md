@@ -37,6 +37,85 @@ A continuación se muestra el contenido del curso, desde la instalación de herr
 - Introducción a los controladores y acciones
 - Uso de rutas y atributos
 - CRUD básico (Create, Read, Update, Delete)
+```csharp
+using Microsoft.AspNetCore.Mvc;
+using API.Models;
+
+namespace API.Controllers;
+
+[ApiController]
+[Route("[controller]")]
+public class UsersController : ControllerBase
+{
+    /// <summary>
+    /// Simulación de base de datos
+    /// </summary>
+    private static readonly List<User> _users = [];
+
+    /// <summary>
+    /// Obtener todos los usuarios
+    /// </summary>
+    /// <returns></returns>
+    [HttpGet]
+    public ActionResult<List<User>> GetUsers()
+    {
+        List<User> users = _users;
+        return users;
+    }
+
+    /// <summary>
+    /// Crear un usuario
+    /// </summary>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    [HttpPost]
+    public ActionResult<User> CreateUser(User user)
+    {
+        _users.Add(user);
+        return user;
+    }
+
+    /// <summary>
+    /// Obtener un usuario por su username
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    [HttpGet("{username}")]
+    public ActionResult<User> GetUser(string username)
+    {
+        User user = _users.First(u => u.Username == username);
+        return user;
+    }
+
+    /// <summary>
+    /// Actualizar un usuario
+    /// </summary>
+    /// <param name="username"></param>
+    /// <param name="user"></param>
+    /// <returns></returns>
+    [HttpPut("{username}")]
+    public ActionResult<User> UpdateUser(string username, User userSended)
+    {
+        User userToUpdate = _users.First(u => u.Username == username);
+        userToUpdate.Email = userSended.Email;
+        userToUpdate.Password = userSended.Password;
+        return userToUpdate;
+    }
+
+    /// <summary>
+    /// Eliminar un usuario
+    /// </summary>
+    /// <param name="username"></param>
+    /// <returns></returns>
+    [HttpDelete("{username}")]
+    public ActionResult<User> DeleteUser(string username)
+    {
+        User userToDelete = _users.First(u => u.Username == username);
+        _users.Remove(userToDelete);
+        return userToDelete;
+    }
+}
+```
 - Configuración y manejo de respuestas HTTP
 
 ### 2.3 Conexión a Bases de Datos con Entity Framework Core
