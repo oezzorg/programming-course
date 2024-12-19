@@ -8,18 +8,18 @@ namespace API.Controllers;
 public class UsersController : ControllerBase
 {
     /// <summary>
-    /// Simulación de base de datos
-    /// </summary>
-    private static readonly List<User> Users = [];
-
-    /// <summary>
     /// Obtener todos los usuarios
     /// </summary>
     /// <returns></returns>
     [HttpGet]
     public ActionResult<List<User>> GetUsers()
     {
-        List<User> users = Users;
+        using var db = new Context();
+
+        List<User> users = db.Users
+            .OrderBy(user => user.Id)
+            .ToList();
+        
         return Ok(users);
     }
 
@@ -31,9 +31,16 @@ public class UsersController : ControllerBase
     [HttpPost]
     public ActionResult<User> CreateUser(User user)
     {
-        user.Id = Users.Count + 1;
+        // Conectarse a la base de datos
+        using var db = new Context();
+        
         user.Created = DateTime.UtcNow;
-        Users.Add(user);
+
+        // Agregamos a la tabla "Users"
+        db.Users.Add(user);
+        // Guardamos cambios en la base de datos
+        db.SaveChanges();
+        
         return Created(nameof(GetUser), user);
     }
 
@@ -45,7 +52,9 @@ public class UsersController : ControllerBase
     [HttpGet("{id:int}")]
     public ActionResult<User> GetUser(int id)
     {
-        var user = Users.FirstOrDefault(u => u.Id == id);
+        using var db = new Context();
+        
+        var user = db.Users.FirstOrDefault(u => u.Id == id);
 
         if (user is null)
         {
@@ -64,13 +73,21 @@ public class UsersController : ControllerBase
     [HttpPut("{id:int}")]
     public ActionResult<User> UpdateUser(int id, User sentUser)
     {
+        using var db = new Context();
         try
         {
-            User userToUpdate = Users.First(u => u.Id == id);
+            User userToUpdate = db.Users.First(u => u.Id == id);
             userToUpdate.Username = sentUser.Username;
             userToUpdate.Email = sentUser.Email;
             userToUpdate.Password = sentUser.Password;
             userToUpdate.Updated = DateTime.UtcNow;
+            
+            // Actualizamos en la tabla de usuarios
+            db.Users.Update(userToUpdate);
+            
+            // Guardamos cambios en la base de datos
+            db.SaveChanges();
+            
             return Ok(userToUpdate);
         }
         catch (Exception e)
@@ -86,10 +103,17 @@ public class UsersController : ControllerBase
     [HttpDelete("{id:int}")]
     public ActionResult DeleteUser(int id)
     {
+        using var db = new Context();
         try
         {
-            User userToDelete = Users.First(u => u.Id == id);
-            Users.Remove(userToDelete);
+            User userToDelete = db.Users.First(u => u.Id == id);
+            
+            // Eliminar de la tabla de usuarios
+            db.Users.Remove(userToDelete);
+            
+            // Guardamos cambios en la base de datos
+            db.SaveChanges();
+            
             return NoContent();
         }
         catch (Exception e)
